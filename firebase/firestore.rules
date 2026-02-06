@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function hasRole(role) {
+      return isSignedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == role;
+    }
+
+    match /users/{userId} {
+      allow read: if isSignedIn() && request.auth.uid == userId;
+      allow write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    match /driver_profiles/{userId} {
+      allow read, write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    match /vehicles/{vehicleId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn() && (hasRole('employer') || hasRole('admin'));
+    }
+
+    match /jobs/{jobId} {
+      allow create: if isSignedIn() && (hasRole('employer') || hasRole('admin'));
+      allow read: if isSignedIn() && (
+        hasRole('admin') ||
+        (hasRole('employer') && resource.data.createdBy == request.auth.uid) ||
+        (hasRole('driver') && (resource.data.reservedByDriverId == request.auth.uid || resource.data.assignedDriverId == request.auth.uid))
+      );
+      allow update: if isSignedIn() && (
+        hasRole('admin') ||
+        (hasRole('employer') && resource.data.createdBy == request.auth.uid) ||
+        (hasRole('driver') && (resource.data.reservedByDriverId == request.auth.uid || resource.data.assignedDriverId == request.auth.uid))
+      );
+    }
+
+    match /job_events/{jobId}/events/{eventId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+    }
+
+    match /job_locations/{jobId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+
+    match /places/{placeId} {
+      allow read: if isSignedIn();
+      allow write: if hasRole('admin');
+    }
+
+    match /suppliers/{supplierId} {
+      allow read: if isSignedIn();
+      allow write: if hasRole('admin');
+    }
+  }
+}
