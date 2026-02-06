@@ -1,0 +1,50 @@
+{
+  "users": [
+    {
+      "uid": "driver_ahmet",
+      "role": "driver",
+      "name": "Ahmet Demir",
+      "phone": "+90 532 123 45 67",
+      "membershipPlan": "premium"
+    },
+    {
+      "uid": "employer_ornek",
+      "role": "employer",
+      "name": "Örnek Turizm A.Ş.",
+      "phone": "+90 212 333 55 55",
+      "companyName": "Örnek Turizm A.Ş.",
+      "membershipPlan": "free"
+    }
+  ],
+  "vehicles": [
+    {
+      "vehicleId": "vehicle_34ABC333",
+      "plate": "34 ABC 333",
+      "type": "Sprinter",
+      "capacity": 7,
+      "features": ["Deri Koltuk", "Bebek Koltuğu"],
+      "driverId": "driver_ahmet"
+    }
+  ],
+  "jobs": [
+    {
+      "jobId": "job_ist_fatih",
+      "createdBy": "employer_ornek",
+      "from": {"title": "İstanbul Havalimanı", "regionTag": "IST"},
+      "to": {"title": "Fatih", "regionTag": "FAT"},
+      "price": 1200,
+      "vehicleTypeRequired": "VIP Minibüs",
+      "status": "PUBLISHED",
+      "paymentStatus": "PENDING"
+    }
+  ],
+  "places": [
+    {
+      "placeId": "place_taksim",
+      "name": "Taksim Restaurant",
+      "region": "Taksim",
+      "commissionPercent": 10,
+      "phone": "+90 212 555 34 21"
+    }
+  ]
+}
