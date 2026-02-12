@@ -3,119 +3,410 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kısa Kollu Polo Tişört</title>
+  <title>VIP Araç Uygulaması</title>
   <style>
+    :root {
+      color-scheme: light;
+      --primary: #1e63d4;
+      --primary-dark: #1248a8;
+      --accent: #10b981;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #1f2a44;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+    }
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
       margin: 0;
-      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+    }
+    header {
+      background: linear-gradient(135deg, #1e63d4 0%, #2f8cf0 100%);
+      color: #fff;
+      padding: 48px 24px 72px;
     }
     .container {
       max-width: 1200px;
-      margin: auto;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      overflow: hidden;
+      margin: 0 auto;
     }
-    .viewer {
-      height: 600px;
-      background: #eee;
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+      align-items: center;
     }
-    .content {
-      padding: 30px;
+    .hero h1 {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .hero-actions {
       display: flex;
+      gap: 16px;
       flex-wrap: wrap;
-      gap: 40px;
     }
-    .left, .right {
-      flex: 1;
-      min-width: 300px;
-    }
-    .gallery img {
-      width: 100%;
-      max-width: 250px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    .colors {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .color {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      border: 1px solid #ccc;
-    }
-    .actions {
-      margin-top: 20px;
-    }
-    .actions a {
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
       text-decoration: none;
-      margin-right: 15px;
-      padding: 10px 20px;
-      border-radius: 6px;
-      color: #fff;
-      background: #007bff;
-      display: inline-block;
+      font-weight: 600;
+      border: 1px solid transparent;
     }
-    .actions a.share {
-      background: #28a745;
+    .btn-primary {
+      background: #fff;
+      color: var(--primary-dark);
+    }
+    .btn-outline {
+      border-color: rgba(255,255,255,0.6);
+      color: #fff;
+      background: transparent;
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .hero-card ul {
+      padding-left: 20px;
+      margin: 0;
+      line-height: 1.6;
+    }
+    section {
+      padding: 56px 24px;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .section-title h2 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+    .section-title p {
+      color: var(--muted);
+      margin: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+      border: 1px solid var(--border);
+    }
+    .card h3 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+    .list {
+      padding-left: 18px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(16, 185, 129, 0.15);
+      color: #0f766e;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      align-items: start;
+    }
+    .highlight {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+    .form-layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      font-size: 14px;
+      color: var(--text);
+      background: #f9fafb;
+    }
+    .form-actions {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .form-actions button {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-submit {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-secondary {
+      background: #e2e8f0;
+      color: var(--text);
+    }
+    .footer {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 32px 24px;
+    }
+    .footer small {
+      color: #9ca3af;
     }
   </style>
 </head>
 <body>
-
-<div class="container">
-
-  <!-- 3D Model -->
-  <div class="viewer">
-    <iframe title="T-shirt Polo Lengan Pendek"
-      frameborder="0"
-      allowfullscreen
-      mozallowfullscreen="true"
-      webkitallowfullscreen="true"
-      allow="autoplay; fullscreen; xr-spatial-tracking"
-      src="https://sketchfab.com/models/74c33d16b31346f1a46a55c3ec8e8a78/embed"
-      width="100%" height="100%">
-    </iframe>
-  </div>
-
-  <!-- Ürün Bilgileri -->
-  <div class="content">
-
-    <!-- Sol: Bilgiler -->
-    <div class="left">
-      <h2>Kısa Kollu Polo Tişört</h2>
-      <p><strong>Fiyat:</strong> ₺249,00</p>
-      <p><strong>Açıklama:</strong> Günlük kullanım için hafif ve konforlu pamuklu tişört.</p>
-      <p><strong>Bedenler:</strong> S, M, L, XL</p>
-      <p><strong>Renkler:</strong></p>
-      <div class="colors">
-        <div class="color" style="background-color:#ffffff;" title="Beyaz"></div>
-        <div class="color" style="background-color:#000000;" title="Siyah"></div>
-        <div class="color" style="background-color:#1a4d91;" title="Lacivert"></div>
-        <div class="color" style="background-color:#b4b4b4;" title="Gri"></div>
-        <div class="color" style="background-color:#be3144;" title="Kırmızı"></div>
+  <header>
+    <div class="container hero">
+      <div>
+        <span class="badge">VIP Araç Yönetim Platformu</span>
+        <h1>Tek panelden araç, işveren ve acenta süreçlerini yönetin.</h1>
+        <p>VIP araç uygulaması; işlerin hızlıca paylaşılması, gereksiz bildirimlerin engellenmesi ve raporlamanın tek ekranda toplanması için tasarlanmış uçtan uca bir yönetim deneyimi sunar.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#is-girisi">İş Girişi Ekranını Gör</a>
+          <a class="btn btn-outline" href="#avantajlar">Avantajları İncele</a>
+        </div>
       </div>
-      <div class="actions">
-        <a href="mailto:satis@seninsiten.com?subject=Tişört Satın Alma Talebi&body=Merhaba, tişört ile ilgileniyorum." target="_blank">Satın Al / İletişim</a>
-        <a class="share" href="https://wa.me/?text=Harika%20bir%20tişört%20keşfettim!%20İncele:%20https://seninsiten.com/urunadi.html" target="_blank">Paylaş</a>
+      <div class="hero-card">
+        <h3>Öne Çıkanlar</h3>
+        <ul>
+          <li>İşi ilk alan araçta otomatik kilitleme.</li>
+          <li>Konum, saat ve fiyat filtreli bildirimler.</li>
+          <li>İşveren–araç raporları ve ödeme takibi.</li>
+          <li>Çözüm ortağı tedarikçiler ve mekan listeleri.</li>
+        </ul>
       </div>
     </div>
+  </header>
 
-    <!-- Sağ: Görseller -->
-    <div class="right gallery">
-      <img src="https://i.ibb.co/xtZLQrJn/r-n-g-rseli-1.png" alt="Ürün Görseli 1">
-      <img src="https://i.ibb.co/0jbZ6bb4/r-n-g-rseli-2.png" alt="Ürün Görseli 2">
+  <section id="avantajlar">
+    <div class="container">
+      <div class="section-title">
+        <h2>Sistemi Kullanan Araç Avantajları</h2>
+        <p>İş alımını netleştiren, zaman kazandıran ve kazancı artıran özellikler.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Genel Avantajlar</h3>
+          <ul class="list">
+            <li>İşi ilk seçen araç tarafından kilitleme ve görünürlüğü azaltma.</li>
+            <li>WhatsApp/Telegram arama yükünü ortadan kaldırma.</li>
+            <li>İş takibini tek listede yönetme.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Bildirim Avantajları</h3>
+          <ul class="list">
+            <li>Tek işe tek bildirim: gereksiz mesajları engeller.</li>
+            <li>Çıkış–varış–saat filtreleme (örn. 19:00 sonrası İHL çıkış).</li>
+            <li>Kişiye özel öncelik ve kısıtlama profilleri.</li>
+            <li>Minimum fiyat altı işleri gizleme.</li>
+            <li>İş saati yaklaşınca otomatik hatırlatma.</li>
+            <li>GPS aktifken konuma göre iş önerisi.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Raporlama</h3>
+          <ul class="list">
+            <li>Günlük/haftalık/aylık iş dökümü.</li>
+            <li>Ödeme alındı–alınmadı takibi.</li>
+            <li>Araç–araç ve araç–acenta paylaşımlarının muhasebesi.</li>
+          </ul>
+        </div>
+      </div>
     </div>
+  </section>
 
-  </div>
-</div>
+  <section style="background: #eef2ff;">
+    <div class="container">
+      <div class="section-title">
+        <h2>Sistemi Kullanan İşveren Avantajları</h2>
+        <p>Doğru araca tek mesajla ulaşın, telefon trafiğini azaltın.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Operasyonel Kontrol</h3>
+          <ul class="list">
+            <li>Tek platformda tüm araçlara bildirim gönderimi.</li>
+            <li>Araç türü ve kriterlere göre hedefli iş girişi.</li>
+            <li>İşi ilk alan araca otomatik atanma.</li>
+            <li>İşi iptal etme, güncelleme, pasife alma/aktif etme.</li>
+            <li>Plaka engelleme ve özel plaka listeleri.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Akıllı Takip</h3>
+          <ul class="list">
+            <li>İş saati yaklaşınca sürücü hatırlatması.</li>
+            <li>Yolcu alındı/bırakıldı anlık bildirimleri.</li>
+            <li>Araca ve şoföre puan verme, puan filtresi.</li>
+            <li>Araç ve şoför bilgilerini görüntüleme.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Raporlama</h3>
+          <ul class="list">
+            <li>Verilen işlerin günlük/haftalık/aylık raporu.</li>
+            <li>Ödeme durumlarının anlık takibi.</li>
+            <li>İşveren–araç muhasebesi ve paylaşım dökümleri.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <section>
+    <div class="container split">
+      <div>
+        <div class="section-title" style="text-align: left;">
+          <h2>Diğer Genel Özellikler</h2>
+          <p>Platformu değerli kılan ek hizmet katmanları.</p>
+        </div>
+        <div class="highlight">
+          <h3>Çözüm Ortağı Tedarikçiler</h3>
+          <p class="list">Transfer araçları için özel anlaşmalı tedarikçi ağı:</p>
+          <ul class="list">
+            <li>Oto lastik, bakım, yol yardım hizmetleri</li>
+            <li>Araç yıkama, kuaför ve aksesuar hizmetleri</li>
+            <li>Sigorta/kasko ve reklam–matbaa çözümleri</li>
+          </ul>
+        </div>
+        <div class="highlight" style="margin-top: 16px;">
+          <h3>Hakediş Veren Mekanlar</h3>
+          <p class="list">Turizm faaliyetlerinde hakediş sunan mekanlar uygulamada listelenir:</p>
+          <ul class="list">
+            <li>Bölge bazlı mekan arama ve filtreleme</li>
+            <li>Hakediş oranları ve iletişim bilgileri</li>
+            <li>Özel anlaşmalı ek hakediş avantajları</li>
+          </ul>
+        </div>
+      </div>
+      <div class="highlight" id="is-girisi">
+        <h3>İş Giriş Ekranı (İşveren, Acenta, Şoför)</h3>
+        <p class="list">Tek ekranda iş oluşturma, kriter belirleme ve bildirim gönderimi.</p>
+        <div class="form-layout">
+          <div class="form-group">
+            <label for="from">Çıkış Noktası</label>
+            <input id="from" type="text" placeholder="İstanbul Havalimanı">
+          </div>
+          <div class="form-group">
+            <label for="to">Varış Noktası</label>
+            <input id="to" type="text" placeholder="Fatih">
+          </div>
+          <div class="form-group">
+            <label for="time">Çıkış Saati</label>
+            <input id="time" type="time" value="19:00">
+          </div>
+          <div class="form-group">
+            <label for="vehicle">Araç Türü</label>
+            <select id="vehicle">
+              <option>VIP Minibüs</option>
+              <option>Sprinter</option>
+              <option>Vito</option>
+              <option>Uzun Şase</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="price">Fiyat</label>
+            <input id="price" type="text" placeholder="₺ 1.200">
+          </div>
+          <div class="form-group">
+            <label for="note">Notlar</label>
+            <textarea id="note" rows="3" placeholder="Yolcu sayısı, valiz bilgisi, özel talepler..."></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-submit" type="button">İşi Yayınla</button>
+          <button class="btn-secondary" type="button">Taslak Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #f9fafb;">
+    <div class="container">
+      <div class="section-title">
+        <h2>Ek Sayfalar</h2>
+        <p>Tedarikçi ve Mekan sayfaları kullanıcıların hızlıca avantajları görmesini sağlar.</p>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Tedarikçi Sayfası</h3>
+          <ul class="list">
+            <li>Marka, hizmet türü ve indirim oranı listeleri.</li>
+            <li>Konuma göre filtrelenmiş tedarikçiler.</li>
+            <li>İletişim ve hızlı randevu bağlantıları.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Mekan Sayfası</h3>
+          <ul class="list">
+            <li>Hakediş oranları ve avantajlar.</li>
+            <li>Harita ve navigasyon bağlantıları.</li>
+            <li>Özel kampanyaların bildirimi.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Akıllı Bildirim Paneli</h3>
+          <ul class="list">
+            <li>Çıkış-varış-saat filtreleri.</li>
+            <li>GPS öncelikli otomatik öneriler.</li>
+            <li>Öncelik sırası ve mesaj kısıtları.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <strong>VIP Araç Uygulaması</strong>
+      <p>Kullanıcılarınızın iş alım süreçlerini kolaylaştıran, işverenlere tek panelden yönetim sağlayan yenilikçi platform.</p>
+      <small>© 2024 VIP Araç Yönetim Platformu</small>
+    </div>
+  </footer>
 </body>
 </html>
